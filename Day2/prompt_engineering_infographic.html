@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Prompt Engineering — Visual Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF8F3;
+    --paper-line:#DCD6C7;
+    --ink:#1C2430;
+    --ink-soft:#4E5665;
+    --blue:#2C4A6E;
+    --blue-soft:#5A7FA3;
+    --blue-tint:#E7EEF4;
+    --amber:#D98C2B;
+    --amber-tint:#FBF0DD;
+    --teal:#3E8E82;
+    --teal-tint:#E4F1EE;
+    --red:#B24B33;
+    --red-tint:#F7E9E3;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:#EDEAE1;
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    display:flex;
+    justify-content:center;
+    padding:32px 12px;
+  }
+  .sheet{
+    width:1080px;
+    max-width:100%;
+    background:var(--paper);
+    background-image:
+      linear-gradient(var(--paper-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--paper-line) 1px, transparent 1px);
+    background-size:27px 27px;
+    background-position:-1px -1px;
+    border:1px solid #C9C2AE;
+    position:relative;
+    overflow:hidden;
+  }
+  .corner{position:absolute;width:22px;height:22px;border:2px solid var(--blue);opacity:.55;}
+  .corner.tl{top:14px;left:14px;border-right:none;border-bottom:none;}
+  .corner.tr{top:14px;right:14px;border-left:none;border-bottom:none;}
+  .corner.bl{bottom:14px;left:14px;border-right:none;border-top:none;}
+  .corner.br{bottom:14px;right:14px;border-left:none;border-top:none;}
+
+  header{
+    padding:56px 64px 32px;
+    border-bottom:2px solid var(--ink);
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--blue);
+    margin-bottom:10px;
+  }
+  h1{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:46px;
+    line-height:1.05;
+    margin:0 0 14px;
+    letter-spacing:-.01em;
+  }
+  .definition{
+    font-size:17px;
+    line-height:1.6;
+    color:var(--ink-soft);
+    max-width:720px;
+  }
+  .definition strong{color:var(--ink);font-weight:600;}
+
+  section{padding:44px 64px;}
+  section + section{border-top:1px solid var(--paper-line);}
+
+  .sec-label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--blue-soft);
+    margin-bottom:6px;
+  }
+  h2{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:600;
+    font-size:26px;
+    margin:0 0 24px;
+  }
+
+  /* Techniques */
+  .tech-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;}
+  .tech-card{
+    background:#fff;
+    border:1px solid var(--paper-line);
+    border-top:3px solid var(--blue);
+    padding:18px 14px;
+    min-height:170px;
+    display:flex;flex-direction:column;
+  }
+  .tech-icon{font-size:20px;margin-bottom:10px;}
+  .tech-name{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14.5px;margin-bottom:8px;line-height:1.25;}
+  .tech-desc{font-size:12.5px;line-height:1.5;color:var(--ink-soft);}
+
+  /* Flow diagram */
+  .flow-row{display:flex;align-items:stretch;gap:0;margin-bottom:20px;}
+  .flow-box{
+    flex:1;
+    background:var(--blue-tint);
+    border:1px solid var(--blue-soft);
+    padding:16px;
+    text-align:center;
+    position:relative;
+  }
+  .flow-box .ft{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;margin-bottom:4px;}
+  .flow-box .fs{font-size:11.5px;color:var(--ink-soft);}
+  .flow-arrow{
+    width:40px;flex:0 0 40px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:20px;color:var(--blue);
+  }
+  .pitfall-row{display:flex;gap:16px;margin-top:8px;}
+  .pitfall{
+    flex:1;background:var(--red-tint);border:1px solid var(--red);border-radius:2px;
+    padding:14px 16px;
+  }
+  .pitfall .pt{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--red);font-weight:500;margin-bottom:6px;
+  }
+  .pitfall .pd{font-size:12.5px;line-height:1.5;color:var(--ink-soft);}
+  .pitfall .pf{font-size:12.5px;line-height:1.5;margin-top:6px;}
+  .pitfall .pf b{color:var(--teal);}
+
+  /* Transformation example */
+  .redline{
+    background:#fff;border:1px solid var(--paper-line);
+  }
+  .rl-step{
+    display:grid;grid-template-columns:88px 1fr;gap:0;border-bottom:1px solid var(--paper-line);
+  }
+  .rl-step:last-child{border-bottom:none;}
+  .rl-num{
+    background:var(--ink);color:var(--paper);
+    font-family:'JetBrains Mono',monospace;font-size:13px;
+    display:flex;align-items:center;justify-content:center;
+    writing-mode:horizontal-tb;
+  }
+  .rl-body{padding:16px 20px;}
+  .rl-tag{
+    font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--blue);margin-bottom:6px;
+  }
+  .rl-text{
+    font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.55;color:var(--ink);
+  }
+  .rl-add{color:var(--teal);font-weight:500;}
+  .rl-final .rl-num{background:var(--teal);}
+  .rl-final .rl-body{background:var(--teal-tint);}
+
+  /* Before/after examples */
+  .example{margin-bottom:28px;}
+  .example:last-child{margin-bottom:0;}
+  .ex-title{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;margin-bottom:10px;}
+  .ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .ba-box{padding:14px 16px;border:1px solid var(--paper-line);}
+  .ba-box.before{background:var(--red-tint);border-color:var(--red);}
+  .ba-box.after{background:var(--teal-tint);border-color:var(--teal);}
+  .ba-label{font-family:'JetBrains Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;}
+  .ba-box.before .ba-label{color:var(--red);}
+  .ba-box.after .ba-label{color:var(--teal);}
+  .ba-text{font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.55;}
+
+  /* Design spec sidebar */
+  .spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  .spec-block .sb-title{
+    font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;margin-bottom:10px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .swatch-row{display:flex;gap:8px;margin-bottom:10px;}
+  .swatch{width:34px;height:34px;border:1px solid rgba(0,0,0,.15);flex:0 0 34px;}
+  .spec-text{font-size:12.5px;line-height:1.6;color:var(--ink-soft);}
+  .spec-text code{font-family:'JetBrains Mono',monospace;font-size:11.5px;background:#fff;padding:1px 5px;border:1px solid var(--paper-line);}
+
+  footer{
+    padding:36px 64px 48px;
+    background:var(--ink);
+    color:var(--paper);
+  }
+  .takeaway-label{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--amber);margin-bottom:10px;
+  }
+  .takeaway{
+    font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:22px;line-height:1.35;max-width:800px;
+  }
+
+  @media (max-width:820px){
+    header,section{padding-left:24px;padding-right:24px;}
+    .tech-grid{grid-template-columns:repeat(2,1fr);}
+    .ba-grid{grid-template-columns:1fr;}
+    .spec-grid{grid-template-columns:1fr;}
+    .pitfall-row{flex-direction:column;}
+    h1{font-size:32px;}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+
+  <header>
+    <div class="eyebrow">Field guide — 01</div>
+    <h1>Prompt engineering</h1>
+    <p class="definition">
+      <strong>Prompt engineering is the practice of designing clear, structured instructions</strong>
+      so an AI model produces the response you actually want — on the first try, not the fifth.
+      It's less about magic words and more about giving the model the same clarity you'd give
+      a capable new colleague: who they're acting as, what exactly you need, and what "done" looks like.
+    </p>
+  </header>
+
+  <section>
+    <div class="sec-label">Section 02</div>
+    <h2>Five core techniques</h2>
+    <div class="tech-grid">
+      <div class="tech-card">
+        <div class="tech-icon">◒</div>
+        <div class="tech-name">Role &amp; context</div>
+        <div class="tech-desc">Tell the model who to act as and what background it should assume before it starts.</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-icon">▭</div>
+        <div class="tech-name">Specificity &amp; scope</div>
+        <div class="tech-desc">Say exactly what's included, what's excluded, and how big or narrow the task is.</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-icon">↝</div>
+        <div class="tech-name">Process guidance</div>
+        <div class="tech-desc">Spell out the steps or method the model should follow, not just the end goal.</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-icon">▤</div>
+        <div class="tech-name">Output formatting</div>
+        <div class="tech-desc">Specify the shape of the answer — list, table, length, headers — so it's usable immediately.</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-icon">∴</div>
+        <div class="tech-name">Chain-of-thought</div>
+        <div class="tech-desc">Ask the model to reason through the problem step by step before giving a final answer.</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Section 03</div>
+    <h2>From prompt to output — and where it breaks</h2>
+    <div class="flow-row">
+      <div class="flow-box"><div class="ft">User prompt</div><div class="fs">what you type in</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box"><div class="ft">Model interpretation</div><div class="fs">how it reads your intent</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box"><div class="ft">Reasoning &amp; drafting</div><div class="fs">it works the task</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box"><div class="ft">Desired output</div><div class="fs">what you actually get</div></div>
+    </div>
+    <div class="pitfall-row">
+      <div class="pitfall">
+        <div class="pt">Pitfall — ambiguity</div>
+        <div class="pd">Vague wording lets the model guess your meaning, and it often guesses wrong.</div>
+        <div class="pf">Fix: <b>add specificity</b> — name the topic, audience, and goal directly.</div>
+      </div>
+      <div class="pitfall">
+        <div class="pt">Pitfall — scope creep</div>
+        <div class="pd">Open-ended asks invite the model to cover everything, producing bloated answers.</div>
+        <div class="pf">Fix: <b>set boundaries</b> — state what to leave out and how deep to go.</div>
+      </div>
+      <div class="pitfall">
+        <div class="pt">Pitfall — missing constraints</div>
+        <div class="pd">No format or length guidance means you get whatever shape the model defaults to.</div>
+        <div class="pf">Fix: <b>define output rules</b> — format, length, tone, structure.</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Section 04</div>
+    <h2>Vague to precise, one layer at a time</h2>
+    <div class="redline">
+      <div class="rl-step">
+        <div class="rl-num">01</div>
+        <div class="rl-body">
+          <div class="rl-tag">Start — vague prompt</div>
+          <div class="rl-text">"Write about dogs."</div>
+        </div>
+      </div>
+      <div class="rl-step">
+        <div class="rl-num">02</div>
+        <div class="rl-body">
+          <div class="rl-tag">+ Role &amp; context</div>
+          <div class="rl-text">"<span class="rl-add">You are an experienced veterinarian</span> writing about dogs."</div>
+        </div>
+      </div>
+      <div class="rl-step">
+        <div class="rl-num">03</div>
+        <div class="rl-body">
+          <div class="rl-tag">+ Audience</div>
+          <div class="rl-text">"...writing <span class="rl-add">for first-time puppy owners.</span>"</div>
+        </div>
+      </div>
+      <div class="rl-step">
+        <div class="rl-num">04</div>
+        <div class="rl-body">
+          <div class="rl-tag">+ Specificity &amp; scope</div>
+          <div class="rl-text">"...explain <span class="rl-add">the 3 most important things to know about caring for a puppy in its first year.</span>"</div>
+        </div>
+      </div>
+      <div class="rl-step">
+        <div class="rl-num">05</div>
+        <div class="rl-body">
+          <div class="rl-tag">+ Process guidance</div>
+          <div class="rl-text">"<span class="rl-add">First list the three needs, then explain each in 2–3 sentences.</span>"</div>
+        </div>
+      </div>
+      <div class="rl-step">
+        <div class="rl-num">06</div>
+        <div class="rl-body">
+          <div class="rl-tag">+ Output formatting</div>
+          <div class="rl-text">"<span class="rl-add">Format as a bulleted list with bold headers, under 250 words.</span>"</div>
+        </div>
+      </div>
+      <div class="rl-step">
+        <div class="rl-num">07</div>
+        <div class="rl-body">
+          <div class="rl-tag">+ Chain-of-thought</div>
+          <div class="rl-text">"<span class="rl-add">Before answering, briefly think through what a first-time owner would find most confusing.</span>"</div>
+        </div>
+      </div>
+      <div class="rl-step rl-final">
+        <div class="rl-num">08</div>
+        <div class="rl-body">
+          <div class="rl-tag">Final — precise prompt</div>
+          <div class="rl-text">"You are an experienced veterinarian writing for first-time puppy owners. Before answering, briefly think through what a new owner would find most confusing. Then explain the 3 most important things to know about caring for a puppy in its first year — first list the three needs, then explain each in 2–3 sentences. Format as a bulleted list with bold headers, under 250 words."</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Section 05</div>
+    <h2>Before / after, in practice</h2>
+
+    <div class="example">
+      <div class="ex-title">Email drafting</div>
+      <div class="ba-grid">
+        <div class="ba-box before"><div class="ba-label">Before</div><div class="ba-text">"Write an email to my team about the deadline."</div></div>
+        <div class="ba-box after"><div class="ba-label">After</div><div class="ba-text">"You are a project manager. Write a short, direct email to my 5-person design team letting them know the Friday deadline is now Wednesday. Explain the reason in one sentence, keep it under 100 words, and end with a clear next step."</div></div>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="ex-title">Data summary</div>
+      <div class="ba-grid">
+        <div class="ba-box before"><div class="ba-label">Before</div><div class="ba-text">"Summarize this sales data."</div></div>
+        <div class="ba-box after"><div class="ba-label">After</div><div class="ba-text">"Act as a sales analyst. Summarize this quarter's data for a non-technical executive. Identify the top 3 trends, think through what's driving each one, then present findings as a 3-bullet list with one supporting number per bullet."</div></div>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="ex-title">Creative brainstorm</div>
+      <div class="ba-grid">
+        <div class="ba-box before"><div class="ba-label">Before</div><div class="ba-text">"Give me some birthday party ideas."</div></div>
+        <div class="ba-box after"><div class="ba-label">After</div><div class="ba-text">"You are an event planner on a budget. Suggest 5 birthday party themes for a 7-year-old, indoors, under $150. For each, give a one-line concept and one easy activity. Present as a numbered list."</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Section 06 — for the designer</div>
+    <h2>Layout specs for a shareable infographic</h2>
+    <div class="spec-grid">
+      <div class="spec-block">
+        <div class="sb-title">Dimensions</div>
+        <div class="spec-text">
+          Social carousel: <code>1080×1350px</code> (4:5) per panel.<br>
+          Single-image share: <code>1080×1920px</code> (story) or <code>1200×1600px</code> (print-friendly A4-ish, 150dpi).
+        </div>
+      </div>
+      <div class="spec-block">
+        <div class="sb-title">Color palette</div>
+        <div class="swatch-row">
+          <div class="swatch" style="background:#FAF8F3;"></div>
+          <div class="swatch" style="background:#2C4A6E;"></div>
+          <div class="swatch" style="background:#D98C2B;"></div>
+          <div class="swatch" style="background:#3E8E82;"></div>
+          <div class="swatch" style="background:#B24B33;"></div>
+          <div class="swatch" style="background:#1C2430;"></div>
+        </div>
+        <div class="spec-text">Paper <code>#FAF8F3</code> · blue <code>#2C4A6E</code> · amber <code>#D98C2B</code> · teal <code>#3E8E82</code> · red <code>#B24B33</code> · ink <code>#1C2430</code></div>
+      </div>
+      <div class="spec-block">
+        <div class="sb-title">Typography</div>
+        <div class="spec-text">
+          Headers: <code>Space Grotesk</code>, semibold–bold.<br>
+          Body: <code>Inter</code>, regular–medium, 1.5–1.7 line height.<br>
+          Prompt text / labels: <code>JetBrains Mono</code>, for a "technical instruction" feel.
+        </div>
+      </div>
+      <div class="spec-block">
+        <div class="sb-title">Iconography</div>
+        <div class="spec-text">
+          Simple line-weight glyphs (outline style, 1.5–2px stroke) over illustration — clock, list, gear, chat-bubble, arrow. Use a blueprint grid background and corner brackets to reinforce the "technical drafting" feel. Keep icons monochrome; let the palette carry meaning, not the icons.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="takeaway-label">Takeaway</div>
+    <div class="takeaway">A good prompt isn't longer — it's more specific. Tell the model who to be, what counts as done, and how to show its work.</div>
+  </footer>
+</div>
+</body>
+</html>
