@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Misbah Fayaz | AI & Data Science Enthusiast</title>
+  <meta name="description" content="Portfolio of Misbah Fayaz, a B.Tech student in Artificial Intelligence and Data Science building practical AI, data science and software projects.">
+  <meta name="keywords" content="Misbah Fayaz, AI, Data Science, GenAI, Python, Machine Learning, SQL, Circuit IQ, Portfolio">
+  <meta name="author" content="Misbah Fayaz">
+  <meta property="og:title" content="Misbah Fayaz | AI & Data Science Enthusiast">
+  <meta property="og:description" content="Explore Misbah Fayaz's projects, skills and achievements in AI, data science and software engineering.">
+  <meta property="og:type" content="website">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif']
+          },
+          colors: {
+            brand: {
+              purple: '#8b5cf6',
+              teal: '#14b8a6'
+            }
+          },
+          boxShadow: {
+            glow: '0 0 40px rgba(139, 92, 246, 0.18)'
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: Inter, sans-serif; }
+    .gradient-text {
+      background: linear-gradient(90deg, #8b5cf6, #14b8a6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .gradient-border {
+      position: relative;
+    }
+    .gradient-border::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      padding: 1px;
+      border-radius: inherit;
+      background: linear-gradient(135deg, rgba(139,92,246,.6), rgba(20,184,166,.35), transparent 70%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+    .grid-bg {
+      background-image:
+        linear-gradient(rgba(139,92,246,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(20,184,166,.06) 1px, transparent 1px);
+      background-size: 45px 45px;
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .skill-fill {
+      width: 0;
+      transition: width 1.2s cubic-bezier(.2,.8,.2,1);
+    }
+    .skill-fill.animate { width: var(--skill); }
+    .typing-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.05em;
+      margin-left: 4px;
+      vertical-align: -2px;
+      background: currentColor;
+      animation: blink .8s infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+    .blob {
+      animation: float 8s ease-in-out infinite;
+    }
+    .blob2 {
+      animation: float 10s ease-in-out infinite reverse;
+    }
+    @keyframes float {
+      0%,100% { transform: translate3d(0,0,0); }
+      50% { transform: translate3d(0,-18px,0); }
+    }
+    .nav-active { color: #8b5cf6 !important; }
+  </style>
+</head>
+
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300">
+
+  <!-- Background decoration -->
+  <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+    <div class="blob absolute -top-40 -right-40 h-96 w-96 rounded-full bg-purple-500/10 blur-3xl"></div>
+    <div class="blob2 absolute top-[45%] -left-48 h-96 w-96 rounded-full bg-teal-500/10 blur-3xl"></div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="fixed top-0 left-0 right-0 z-50 border-b border-slate-200/70 bg-slate-50/80 backdrop-blur-xl dark:border-slate-800/70 dark:bg-slate-950/80">
+    <nav class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
+      <a href="#home" class="text-xl font-extrabold tracking-tight">
+        M<span class="gradient-text">F.</span>
+      </a>
+
+      <div class="hidden items-center gap-7 md:flex">
+        <a data-nav="home" href="#home" class="text-sm font-medium text-slate-600 transition hover:text-purple-500 dark:text-slate-300">Home</a>
+        <a data-nav="about" href="#about" class="text-sm font-medium text-slate-600 transition hover:text-purple-500 dark:text-slate-300">About</a>
+        <a data-nav="skills" href="#skills" class="text-sm font-medium text-slate-600 transition hover:text-purple-500 dark:text-slate-300">Skills</a>
+        <a data-nav="projects" href="#projects" class="text-sm font-medium text-slate-600 transition hover:text-purple-500 dark:text-slate-300">Projects</a>
+        <a data-nav="achievements" href="#achievements" class="text-sm font-medium text-slate-600 transition hover:text-purple-500 dark:text-slate-300">Achievements</a>
+        <a data-nav="contact" href="#contact" class="text-sm font-medium text-slate-600 transition hover:text-purple-500 dark:text-slate-300">Contact</a>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button id="themeToggle" aria-label="Toggle dark mode" class="rounded-xl border border-slate-200 p-2.5 transition hover:border-purple-400 hover:text-purple-500 dark:border-slate-700">
+          <span id="themeIcon">🌙</span>
+        </button>
+        <button id="menuToggle" aria-label="Open menu" class="rounded-xl border border-slate-200 p-2.5 md:hidden dark:border-slate-700">☰</button>
+      </div>
+    </nav>
+
+    <div id="mobileMenu" class="hidden border-t border-slate-200 bg-slate-50 px-5 py-4 dark:border-slate-800 dark:bg-slate-950 md:hidden">
+      <div class="flex flex-col gap-4">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#achievements">Achievements</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section id="home" class="grid-bg relative flex min-h-screen items-center overflow-hidden pt-24">
+      <div class="mx-auto grid max-w-6xl items-center gap-14 px-5 py-20 md:grid-cols-[1.2fr_.8fr]">
+        <div class="reveal">
+          <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-purple-200 bg-purple-50 px-4 py-2 text-sm font-medium text-purple-700 dark:border-purple-900/60 dark:bg-purple-950/30 dark:text-purple-300">
+            <span class="h-2 w-2 animate-pulse rounded-full bg-teal-400"></span>
+            Open to learning & building
+          </div>
+
+          <p class="mb-3 text-lg font-semibold text-teal-600 dark:text-teal-400">Hi, I'm</p>
+          <h1 class="text-5xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl">
+            Misbah <span class="gradient-text">Fayaz</span>
+          </h1>
+
+          <div class="mt-6 min-h-[2.5rem] text-xl font-semibold text-slate-700 dark:text-slate-300 sm:text-2xl">
+            <span id="typingText"></span><span class="typing-cursor"></span>
+          </div>
+
+          <p class="mt-6 max-w-2xl text-base leading-8 text-slate-600 dark:text-slate-400 sm:text-lg">
+            B.Tech student in Artificial Intelligence & Data Science, building practical projects at the intersection of AI, data and software engineering.
+          </p>
+
+          <div class="mt-9 flex flex-wrap gap-4">
+            <a href="#projects" class="rounded-xl bg-gradient-to-r from-purple-600 to-teal-500 px-6 py-3.5 font-semibold text-white shadow-lg shadow-purple-500/20 transition hover:-translate-y-1 hover:shadow-xl">
+              Explore My Work →
+            </a>
+            <a href="#contact" class="rounded-xl border border-slate-300 px-6 py-3.5 font-semibold transition hover:-translate-y-1 hover:border-purple-400 hover:text-purple-500 dark:border-slate-700">
+              Let's Connect
+            </a>
+          </div>
+
+          <div class="mt-9 flex items-center gap-5">
+            <a href="https://www.linkedin.com/in/misbah-dar-50545640a/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="text-slate-500 transition hover:scale-110 hover:text-[#0A66C2] dark:text-slate-400">
+              <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.58c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.68H9.34V8.99h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.62 0 4.29 2.38 4.29 5.47v6.28ZM5.32 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14ZM3.54 20.45H7.1V8.99H3.54v11.46Z"/></svg>
+            </a>
+            <a href="https://github.com/Misbah361" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="text-slate-500 transition hover:scale-110 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white">
+              <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .7a11.3 11.3 0 0 0-3.57 22.02c.57.1.78-.25.78-.55v-2.16c-3.17.69-3.84-1.34-3.84-1.34-.52-1.31-1.27-1.66-1.27-1.66-1.04-.71.08-.69.08-.69 1.15.08 1.75 1.18 1.75 1.18 1.02 1.74 2.68 1.24 3.33.95.1-.74.4-1.24.73-1.53-2.53-.29-5.19-1.27-5.19-5.65 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.45.11-3.03 0 0 .96-.31 3.13 1.17a10.9 10.9 0 0 1 5.7 0c2.17-1.48 3.13-1.17 3.13-1.17.62 1.58.23 2.74.11 3.03.74.8 1.18 1.82 1.18 3.07 0 4.39-2.67 5.35-5.21 5.64.41.35.78 1.05.78 2.12v3.14c0 .3.21.66.79.55A11.3 11.3 0 0 0 12 .7Z"/></svg>
+            </a>
+            <a href="mailto:misbafayaz8@gmail.com" class="text-sm font-medium text-slate-500 transition hover:text-purple-500 dark:text-slate-400">
+              misbafayaz8@gmail.com
+            </a>
+          </div>
+        </div>
+
+        <div class="reveal flex justify-center">
+          <div class="gradient-border relative w-full max-w-sm rounded-3xl bg-white/70 p-8 shadow-glow backdrop-blur-xl dark:bg-slate-900/70">
+            <div class="absolute -right-5 -top-5 rounded-2xl border border-teal-400/30 bg-teal-400/10 px-4 py-3 text-sm font-semibold text-teal-600 dark:text-teal-300">
+              AI × Data × Code
+            </div>
+            <div class="mx-auto flex h-56 w-56 items-center justify-center rounded-full bg-gradient-to-br from-purple-600/20 via-slate-100 to-teal-400/20 ring-1 ring-purple-400/20 dark:from-purple-600/20 dark:via-slate-800 dark:to-teal-400/20">
+              <div class="flex h-36 w-36 items-center justify-center rounded-full bg-gradient-to-br from-purple-600 to-teal-500 text-5xl font-extrabold text-white shadow-2xl">
+                MF
+              </div>
+            </div>
+            <div class="mt-8 text-center">
+              <h2 class="text-xl font-bold">Building. Learning. Iterating.</h2>
+              <p class="mt-2 text-sm leading-6 text-slate-500 dark:text-slate-400">
+                Turning ideas into practical technology through continuous experimentation.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="border-t border-slate-200 py-24 dark:border-slate-800">
+      <div class="mx-auto max-w-6xl px-5">
+        <div class="reveal max-w-3xl">
+          <p class="font-semibold uppercase tracking-[.2em] text-purple-500">01 / About</p>
+          <h2 class="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">A curious builder with an AI mindset.</h2>
+        </div>
+
+        <div class="mt-12 grid gap-10 md:grid-cols-3">
+          <div class="reveal md:col-span-2">
+            <p class="text-lg leading-9 text-slate-600 dark:text-slate-400">
+              I'm <strong class="text-slate-900 dark:text-white">Misbah Fayaz</strong>, a B.Tech student in Artificial Intelligence and Data Science at the University of Kashmir, North Campus. I enjoy building practical, real-world projects where AI, data and software engineering come together.
+            </p>
+            <p class="mt-5 text-lg leading-9 text-slate-600 dark:text-slate-400">
+              My recent work includes <strong class="text-purple-500">Circuit.IQ</strong>, a 3D virtual electronics laboratory with physics simulations and an AI-powered tutor. Alongside project building, I'm continuously developing my skills through coursework, data analysis and prompt-engineering experiments.
+            </p>
+          </div>
+
+          <div class="reveal rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+            <div class="space-y-5">
+              <div>
+                <p class="text-xs uppercase tracking-widest text-slate-400">Location</p>
+                <p class="mt-1 font-semibold">Srinagar, India</p>
+              </div>
+              <div>
+                <p class="text-xs uppercase tracking-widest text-slate-400">Focus</p>
+                <p class="mt-1 font-semibold">AI · Data Science · Software</p>
+              </div>
+              <div>
+                <p class="text-xs uppercase tracking-widest text-slate-400">Education</p>
+                <p class="mt-1 font-semibold">B.Tech — AI & Data Science</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="bg-slate-100/70 py-24 dark:bg-slate-900/40">
+      <div class="mx-auto max-w-6xl px-5">
+        <div class="reveal">
+          <p class="font-semibold uppercase tracking-[.2em] text-teal-500">02 / Skills</p>
+          <h2 class="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">Tools I use to turn ideas into things.</h2>
+        </div>
+
+        <div class="mt-12 grid gap-8 lg:grid-cols-3">
+          <div class="reveal rounded-2xl border border-slate-200 bg-white p-7 dark:border-slate-800 dark:bg-slate-950">
+            <h3 class="text-xl font-bold">Technical</h3>
+            <div class="mt-6 space-y-5">
+              <div><div class="mb-2 flex justify-between text-sm"><span>Python</span><span>90%</span></div><div class="h-2 rounded-full bg-slate-200 dark:bg-slate-800"><div class="skill-fill h-2 rounded-full bg-gradient-to-r from-purple-500 to-teal-400" style="--skill:90%"></div></div></div>
+              <div><div class="mb-2 flex justify-between text-sm"><span>SQL</span><span>75%</span></div><div class="h-2 rounded-full bg-slate-200 dark:bg-slate-800"><div class="skill-fill h-2 rounded-full bg-gradient-to-r from-purple-500 to-teal-400" style="--skill:75%"></div></div></div>
+              <div><div class="mb-2 flex justify-between text-sm"><span>Machine Learning</span><span>70%</span></div><div class="h-2 rounded-full bg-slate-200 dark:bg-slate-800"><div class="skill-fill h-2 rounded-full bg-gradient-to-r from-purple-500 to-teal-400" style="--skill:70%"></div></div></div>
+              <div><div class="mb-2 flex justify-between text-sm"><span>JavaScript</span><span>70%</span></div><div class="h-2 rounded-full bg-slate-200 dark:bg-slate-800"><div class="skill-fill h-2 rounded-full bg-gradient-to-r from-purple-500 to-teal-400" style="--skill:70%"></div></div></div>
+            </div>
+          </div>
+
+          <div class="reveal rounded-2xl border border-slate-200 bg-white p-7 dark:border-slate-800 dark:bg-slate-950">
+            <h3 class="text-xl font-bold">Tools & Technologies</h3>
+            <div class="mt-6 flex flex-wrap gap-2">
+              <span class="tech-tag">Git</span><span class="tech-tag">GitHub</span><span class="tech-tag">VS Code</span>
+              <span class="tech-tag">Jupyter</span><span class="tech-tag">React</span><span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">TailwindCSS</span><span class="tech-tag">Three.js</span><span class="tech-tag">Flask</span>
+              <span class="tech-tag">Supabase</span><span class="tech-tag">SQLite</span><span class="tech-tag">Gemini AI</span>
+            </div>
+          </div>
+
+          <div class="reveal rounded-2xl border border-slate-200 bg-white p-7 dark:border-slate-800 dark:bg-slate-950">
+            <h3 class="text-xl font-bold">Soft Skills</h3>
+            <div class="mt-6 flex flex-wrap gap-2">
+              <span class="soft-tag">Communication</span><span class="soft-tag">Problem Solving</span>
+              <span class="soft-tag">Continuous Learning</span><span class="soft-tag">Creativity</span>
+              <span class="soft-tag">Teamwork</span><span class="soft-tag">Adaptability</span>
+            </div>
+            <div class="mt-8 rounded-xl bg-gradient-to-br from-purple-500/10 to-teal-500/10 p-5">
+              <p class="text-sm leading-6 text-slate-600 dark:text-slate-400">
+                My goal isn't just to learn technologies — it's to understand them well enough to build useful things.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="py-24">
+      <div class="mx-auto max-w-6xl px-5">
+        <div class="reveal">
+          <p class="font-semibold uppercase tracking-[.2em] text-purple-500">03 / Projects</p>
+          <h2 class="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">Things I've been building.</h2>
+        </div>
+
+        <article class="reveal gradient-border mt-12 rounded-3xl bg-white p-7 shadow-sm dark:bg-slate-900 sm:p-9">
+          <div class="flex flex-col justify-between gap-6 md:flex-row">
+            <div>
+              <div class="flex flex-wrap items-center gap-3">
+                <span class="rounded-full bg-purple-100 px-3 py-1 text-xs font-bold text-purple-700 dark:bg-purple-950/50 dark:text-purple-300">FEATURED PROJECT</span>
+                <span class="text-sm text-slate-400">01</span>
+              </div>
+              <h3 class="mt-5 text-3xl font-extrabold">Circuit.IQ</h3>
+              <p class="mt-2 text-lg font-medium text-teal-600 dark:text-teal-400">A Virtual Physics Laboratory</p>
+              <p class="mt-5 max-w-3xl leading-8 text-slate-600 dark:text-slate-400">
+                An interactive 3D virtual electronics laboratory that combines circuit simulation, physics-focused learning and an AI-powered tutor to make experimentation more accessible and engaging.
+              </p>
+            </div>
+            <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-600 to-teal-500 text-2xl text-white shadow-lg">⚡</div>
+          </div>
+
+          <div class="mt-8 border-t border-slate-200 pt-7 dark:border-slate-800">
+            <p class="mb-4 text-sm font-semibold uppercase tracking-wider text-slate-400">Tech Stack</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="tech-tag">React 19</span><span class="tech-tag">TypeScript</span><span class="tech-tag">TailwindCSS</span>
+              <span class="tech-tag">Zustand</span><span class="tech-tag">Framer Motion</span><span class="tech-tag">GSAP</span>
+              <span class="tech-tag">Vite</span><span class="tech-tag">Three.js</span><span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">Python</span><span class="tech-tag">Flask</span><span class="tech-tag">Gemini AI</span>
+              <span class="tech-tag">SQLite</span><span class="tech-tag">Supabase</span><span class="tech-tag">Git & GitHub</span>
+            </div>
+          </div>
+        </article>
+
+        <div class="reveal mt-6 rounded-2xl border border-dashed border-slate-300 p-6 text-center dark:border-slate-700">
+          <p class="font-medium text-slate-500 dark:text-slate-400">More projects are on the way — this portfolio will grow with every build.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Achievements -->
+    <section id="achievements" class="bg-slate-100/70 py-24 dark:bg-slate-900/40">
+      <div class="mx-auto max-w-6xl px-5">
+        <div class="reveal">
+          <p class="font-semibold uppercase tracking-[.2em] text-teal-500">04 / Achievements</p>
+          <h2 class="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">Learning beyond the classroom.</h2>
+        </div>
+
+        <div class="reveal mt-12 max-w-3xl">
+          <div class="flex gap-5 rounded-2xl border border-slate-200 bg-white p-7 dark:border-slate-800 dark:bg-slate-950">
+            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-purple-100 text-xl dark:bg-purple-950/50">🏆</div>
+            <div>
+              <p class="text-sm font-semibold uppercase tracking-wider text-purple-500">Hackathon</p>
+              <h3 class="mt-1 text-xl font-bold">ViCoDathon</h3>
+              <p class="mt-2 leading-7 text-slate-600 dark:text-slate-400">
+                Participated in ViCoDathon, gaining hands-on experience in collaborative problem solving, rapid prototyping and building under real-world constraints.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-24">
+      <div class="mx-auto max-w-6xl px-5">
+        <div class="reveal text-center">
+          <p class="font-semibold uppercase tracking-[.2em] text-purple-500">05 / Contact</p>
+          <h2 class="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">Let's build something.</h2>
+          <p class="mx-auto mt-5 max-w-2xl leading-8 text-slate-600 dark:text-slate-400">
+            Whether it's an opportunity, collaboration, project idea or just a conversation about technology — I'd love to hear from you.
+          </p>
+        </div>
+
+        <div class="mt-12 grid gap-8 lg:grid-cols-2">
+          <div class="reveal rounded-3xl border border-slate-200 bg-white p-7 dark:border-slate-800 dark:bg-slate-900">
+            <h3 class="text-xl font-bold">Send a message</h3>
+            <form id="contactForm" class="mt-6 space-y-5">
+              <div>
+                <label for="name" class="mb-2 block text-sm font-medium">Name</label>
+                <input id="name" required type="text" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 outline-none transition focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 dark:border-slate-700 dark:bg-slate-950" placeholder="Your name">
+              </div>
+              <div>
+                <label for="email" class="mb-2 block text-sm font-medium">Email</label>
+                <input id="email" required type="email" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 outline-none transition focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 dark:border-slate-700 dark:bg-slate-950" placeholder="you@example.com">
+              </div>
+              <div>
+                <label for="message" class="mb-2 block text-sm font-medium">Message</label>
+                <textarea id="message" required rows="5" class="w-full resize-none rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 outline-none transition focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 dark:border-slate-700 dark:bg-slate-950" placeholder="Tell me what's on your mind..."></textarea>
+              </div>
+              <button type="submit" class="w-full rounded-xl bg-gradient-to-r from-purple-600 to-teal-500 px-6 py-3.5 font-semibold text-white transition hover:-translate-y-0.5 hover:shadow-lg">
+                Send via Email →
+              </button>
+              <p id="formStatus" class="hidden text-center text-sm text-teal-600 dark:text-teal-400"></p>
+            </form>
+          </div>
+
+          <div class="reveal flex flex-col justify-between rounded-3xl bg-gradient-to-br from-purple-600 to-teal-500 p-8 text-white shadow-2xl shadow-purple-500/20">
+            <div>
+              <p class="text-sm font-semibold uppercase tracking-[.2em] text-white/70">Direct links</p>
+              <h3 class="mt-3 text-3xl font-extrabold">Find me online.</h3>
+              <div class="mt-8 space-y-4">
+                <a href="mailto:misbafayaz8@gmail.com" class="flex items-center justify-between rounded-xl bg-white/10 p-4 transition hover:bg-white/20">
+                  <span>📧 misbafayaz8@gmail.com</span><span>↗</span>
+                </a>
+                <a href="https://www.linkedin.com/in/misbah-dar-50545640a/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between rounded-xl bg-white/10 p-4 transition hover:bg-white/20">
+                  <span>💼 LinkedIn</span><span>↗</span>
+                </a>
+                <a href="https://github.com/Misbah361" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between rounded-xl bg-white/10 p-4 transition hover:bg-white/20">
+                  <span>💻 GitHub</span><span>↗</span>
+                </a>
+              </div>
+            </div>
+            <p class="mt-10 text-sm text-white/70">Srinagar, India · Available for opportunities & collaborations</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-200 py-8 dark:border-slate-800">
+    <div class="mx-auto flex max-w-6xl flex-col justify-between gap-3 px-5 text-sm text-slate-500 sm:flex-row">
+      <p>© <span id="year"></span> Misbah Fayaz. Built with curiosity & code.</p>
+      <a href="#home" class="transition hover:text-purple-500">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <script>
+    // Shared tag styles
+    document.querySelectorAll('.tech-tag').forEach(tag => {
+      tag.className += ' inline-flex items-center rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-semibold text-slate-600 transition hover:border-purple-400 hover:text-purple-500 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300';
+    });
+    document.querySelectorAll('.soft-tag').forEach(tag => {
+      tag.className += ' inline-flex items-center rounded-lg border border-teal-200 bg-teal-50 px-3 py-1.5 text-xs font-semibold text-teal-700 dark:border-teal-900 dark:bg-teal-950/30 dark:text-teal-300';
+    });
+
+    // Theme
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const savedTheme = localStorage.getItem('portfolio-theme');
+    if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+    function updateThemeIcon() {
+      themeIcon.textContent = document.documentElement.classList.contains('dark') ? '☀️' : '🌙';
+    }
+    updateThemeIcon();
+    themeToggle.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      localStorage.setItem('portfolio-theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+      updateThemeIcon();
+    });
+
+    // Mobile menu
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuToggle.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+    mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+
+    // Typing animation
+    const typingText = document.getElementById('typingText');
+    const phrases = [
+      'AI & Data Science Enthusiast',
+      'GenAI Builder',
+      'Software Engineering Learner',
+      'Problem Solver'
+    ];
+    let phraseIndex = 0, charIndex = 0, deleting = false;
+    function typeLoop() {
+      const phrase = phrases[phraseIndex];
+      typingText.textContent = deleting ? phrase.slice(0, --charIndex) : phrase.slice(0, ++charIndex);
+      let delay = deleting ? 45 : 85;
+      if (!deleting && charIndex === phrase.length) { delay = 1400; deleting = true; }
+      else if (deleting && charIndex === 0) { deleting = false; phraseIndex = (phraseIndex + 1) % phrases.length; delay = 400; }
+      setTimeout(typeLoop, delay);
+    }
+    typeLoop();
+
+    // Scroll reveal
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          entry.target.querySelectorAll?.('.skill-fill').forEach(bar => bar.classList.add('animate'));
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // Skills animation if section itself is already visible
+    const skillSection = document.getElementById('skills');
+    const skillObserver = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        skillSection.querySelectorAll('.skill-fill').forEach(bar => bar.classList.add('animate'));
+        skillObserver.disconnect();
+      }
+    }, { threshold: 0.2 });
+    skillObserver.observe(skillSection);
+
+    // Active navigation highlighting
+    const sections = document.querySelectorAll('main section[id]');
+    const navLinks = document.querySelectorAll('[data-nav]');
+    const navObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => link.classList.remove('nav-active'));
+          const active = document.querySelector(`[data-nav="${entry.target.id}"]`);
+          if (active) active.classList.add('nav-active');
+        }
+      });
+    }, { rootMargin: '-35% 0px -55% 0px' });
+    sections.forEach(section => navObserver.observe(section));
+
+    // Contact form -> mailto
+    const contactForm = document.getElementById('contactForm');
+    const formStatus = document.getElementById('formStatus');
+    contactForm.addEventListener('submit', event => {
+      event.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
+      const body = encodeURIComponent(`Hi Misbah,\n\n${message}\n\nName: ${name}\nEmail: ${email}`);
+      window.location.href = `mailto:misbafayaz8@gmail.com?subject=${subject}&body=${body}`;
+      formStatus.textContent = 'Opening your email client...';
+      formStatus.classList.remove('hidden');
+    });
+
+    // Current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
