@@ -1,0 +1,8 @@
+Key Learnings – Day 11
+ATS scoring isn't just keyword-stuffing — the JD's specific technical terms (PyTorch, TensorFlow, LLMs, video analysis) must genuinely exist in your background to be added; forcing them in without real experience misleads both the ATS and the recruiter.
+Job description quality varies wildly — not every "AI Intern" LinkedIn post is legitimate. Red flags to watch for: self-financed training programs, vague responsibilities, promises of "paid internships abroad," and applications routed to personal emails instead of company portals.
+Location filters on LinkedIn Jobs can silently return 0 results — always check and widen the location (e.g., city → country) before assuming no relevant roles exist.
+High-tech company JDs (e.g., Sony Research) are far more technically demanding than generic internship listings — they specify exact frameworks, algorithms, and evaluation methods, making ATS match scores naturally lower for early-career candidates.
+Honesty in resume optimization matters more than a high match score — rephrasing and reorganizing real experience is valid optimization; inventing skills or projects is not, even if it would "look better" to an ATS.
+A lower match score can still be a useful data point — it clearly shows which skills (e.g., ML frameworks, big data tools) to prioritize learning next, turning the ATS gap analysis into a personal roadmap rather than just a resume-tweaking exercise.
+Professional summaries are a structural lever — adding one lets you front-load role-relevant keywords without altering the factual content of the resume below it.
