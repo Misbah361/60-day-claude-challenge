@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>HDFC Bank Ltd — Deep Dive Fundamental Research</title>
+<style>
+  :root{
+    --bg:#0f1115; --panel:#161922; --panel2:#1c2029; --border:#2a2f3a;
+    --text:#e8eaee; --muted:#9aa2b1; --accent:#5b8cff; --good:#3ecf8e;
+    --warn:#f0b429; --bad:#ef5a5a; --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--bg); color:var(--text); font-family:var(--font); padding:24px;}
+  .wrap{max-width:980px; margin:0 auto;}
+  .header{display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px; margin-bottom:18px;}
+  h1{font-size:24px; margin:0 0 4px 0;}
+  .sub{color:var(--muted); font-size:14px;}
+  .price{font-size:28px; font-weight:700;}
+  .price-change{color:var(--good); font-size:14px; font-weight:600;}
+  .badge{display:inline-block; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:600; margin-left:8px;}
+  .badge.moderate{background:rgba(240,180,41,0.15); color:var(--warn); border:1px solid var(--warn);}
+  .tabs{display:flex; gap:6px; flex-wrap:wrap; border-bottom:1px solid var(--border); margin-bottom:20px; padding-bottom:0;}
+  .tab{padding:10px 16px; cursor:pointer; color:var(--muted); font-size:14px; font-weight:600; border-bottom:2px solid transparent; user-select:none;}
+  .tab.active{color:var(--accent); border-bottom:2px solid var(--accent);}
+  .panel{display:none; animation:fade .2s ease;}
+  .panel.active{display:block;}
+  @keyframes fade{from{opacity:0} to{opacity:1}}
+  .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:12px; margin-bottom:20px;}
+  .card{background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:14px;}
+  .card .label{color:var(--muted); font-size:12px; margin-bottom:6px;}
+  .card .value{font-size:19px; font-weight:700;}
+  .card .note{font-size:11px; color:var(--muted); margin-top:4px;}
+  .section-title{font-size:15px; font-weight:700; margin:22px 0 10px 0; color:var(--accent);}
+  table{width:100%; border-collapse:collapse; font-size:13px; margin-bottom:16px;}
+  th,td{padding:8px 10px; border-bottom:1px solid var(--border); text-align:right;}
+  th:first-child, td:first-child{text-align:left; color:var(--muted);}
+  th{color:var(--muted); font-weight:600; font-size:12px;}
+  tr:last-child td{border-bottom:none;}
+  ul{padding-left:18px; margin:8px 0;}
+  li{margin-bottom:6px; font-size:14px;}
+  .pill{display:inline-block; padding:2px 8px; border-radius:6px; font-size:11px; font-weight:700;}
+  .pill.good{background:rgba(62,207,142,.15); color:var(--good);}
+  .pill.watch{background:rgba(240,180,41,.15); color:var(--warn);}
+  .pill.risk{background:rgba(239,90,90,.15); color:var(--bad);}
+  .flag{color:var(--warn); font-size:12px;}
+  .chart-box{background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:16px; margin-bottom:16px;}
+  svg text{fill:var(--muted); font-size:10px;}
+  .disclaimer{background:var(--panel2); border:1px solid var(--border); border-radius:10px; padding:14px; font-size:12px; color:var(--muted); margin-top:20px;}
+  .conf{font-weight:700;}
+  .conf.high{color:var(--good);}
+  .conf.moderate{color:var(--warn);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="header">
+    <div>
+      <h1>HDFC Bank Ltd <span style="color:var(--muted); font-weight:400; font-size:16px;">(NSE: HDFCBANK)</span></h1>
+      <div class="sub">Private Sector Bank · India's 2nd-largest bank by assets · Mumbai HQ</div>
+    </div>
+    <div style="text-align:right;">
+      <div class="price">₹720 <span class="price-change">+1.31%</span></div>
+      <div class="sub">Close, 28 Aug 2026 · Source: Screener.in</div>
+    </div>
+  </div>
+
+  <div class="tabs" id="tabs">
+    <div class="tab active" data-tab="snapshot">Snapshot</div>
+    <div class="tab" data-tab="valuation">Valuation</div>
+    <div class="tab" data-tab="growth">Growth</div>
+    <div class="tab" data-tab="health">Health</div>
+    <div class="tab" data-tab="returns">Returns</div>
+    <div class="tab" data-tab="peers">Peers</div>
+    <div class="tab" data-tab="ownership">Ownership</div>
+    <div class="tab" data-tab="view">View</div>
+  </div>
+
+  <!-- SNAPSHOT -->
+  <div class="panel active" id="snapshot">
+    <div class="grid">
+      <div class="card"><div class="label">Market Cap</div><div class="value">₹11,10,063 Cr</div></div>
+      <div class="card"><div class="label">CMP</div><div class="value">₹720</div></div>
+      <div class="card"><div class="label">52W High / Low</div><div class="value">₹1,020 / ₹706</div></div>
+      <div class="card"><div class="label">Face Value</div><div class="value">₹1.00</div></div>
+      <div class="card"><div class="label">Stock P/E</div><div class="value">14.0x</div></div>
+      <div class="card"><div class="label">Book Value</div><div class="value">₹390</div></div>
+      <div class="card"><div class="label">Dividend Yield</div><div class="value">1.80%</div></div>
+      <div class="card"><div class="label">ROE (current)</div><div class="value">13.6%</div></div>
+    </div>
+
+    <div class="section-title">Price Chart (Indicative — 5Y trend)</div>
+    <div class="chart-box">
+      <svg viewBox="0 0 700 220" width="100%" height="220">
+        <line x1="40" y1="10" x2="40" y2="190" stroke="#2a2f3a"/>
+        <line x1="40" y1="190" x2="680" y2="190" stroke="#2a2f3a"/>
+        <text x="10" y="15">1020</text><text x="10" y="100">860</text><text x="10" y="190">700</text>
+        <polyline fill="none" stroke="#5b8cff" stroke-width="2.5" points="
+          40,150 100,130 160,110 220,90 280,70 340,55 400,45 460,60 520,80 580,120 640,155 680,150"/>
+        <text x="30" y="205">2021</text><text x="330" y="205">2023</text><text x="620" y="205">2026</text>
+      </svg>
+      <div class="sub" style="margin-top:6px;">Illustrative trend only — stock ran up into 2024 highs (~₹1,020) then corrected toward the ₹700–₹750 zone through 2025–26. 🚩 Verify exact price history at Screener/TradingView.</div>
+    </div>
+
+    <div class="section-title">Business Snapshot</div>
+    <ul>
+      <li>India's largest private-sector bank by assets; ~15% share of system-wide advances, ~37% share among private banks.</li>
+      <li>Segments: Treasury, Retail Banking, Wholesale Banking, Other Banking Business, Insurance.</li>
+      <li>Merged with parent HDFC Ltd in 2023 — this materially reshaped the FY24 balance sheet and profit base, so pre/post-merger comparisons need care.</li>
+    </ul>
+  </div>
+
+  <!-- VALUATION -->
+  <div class="panel" id="valuation">
+    <div class="section-title">Valuation Snapshot</div>
+    <table>
+      <tr><th>Metric</th><th>HDFC Bank</th><th>Interpretation</th></tr>
+      <tr><td>P/E (TTM)</td><td>14.0x</td><td><span class="pill good">Fair / below own 10Y avg</span></td></tr>
+      <tr><td>P/B</td><td>~1.85x</td><td><span class="pill good">Reasonable for ROE profile</span></td></tr>
+      <tr><td>Dividend Yield</td><td>1.80%</td><td><span class="pill good">Healthy, rising payout</span></td></tr>
+    </table>
+    <div class="flag">🚩 Peer P/E figures conflicted across sources (10x–16x range depending on provider/date) — verify current peer multiples directly at Screener.in before drawing firm conclusions.</div>
+
+    <div class="section-title">Verdict</div>
+    <p style="font-size:14px;">Trading well below its own 2024 peak multiples and near/below its 10-year average P/E, HDFC Bank currently screens as <strong>fair to mildly cheap</strong> relative to its own history — though this needs to be read alongside the declining ROE trend below, since a lower multiple can also simply reflect lower expected returns on equity.</p>
+  </div>
+
+  <!-- GROWTH -->
+  <div class="panel" id="growth">
+    <div class="section-title">Growth Trends</div>
+    <table>
+      <tr><th>Period</th><th>Sales CAGR</th><th>Profit CAGR</th></tr>
+      <tr><td>10 Years</td><td>19%</td><td>19%</td></tr>
+      <tr><td>5 Years</td><td>22%</td><td>19%</td></tr>
+      <tr><td>3 Years</td><td>27%</td><td>18%</td></tr>
+      <tr><td>TTM</td><td>3%</td><td>12%</td></tr>
+    </table>
+    <div class="section-title">EPS — Last 8 Quarters (₹)</div>
+    <table>
+      <tr><th>Sep'24</th><th>Dec'24</th><th>Mar'25</th><th>Jun'25</th><th>Sep'25</th><th>Dec'25</th><th>Mar'26</th><th>Jun'26</th></tr>
+      <tr><td>11.68</td><td>11.54</td><td>12.31</td><td>10.60</td><td>12.76</td><td>12.87</td><td>13.22</td><td>12.50</td></tr>
+    </table>
+    <p style="font-size:14px;">Growth pattern: <strong>Slowing</strong>. TTM sales growth (3%) is far below the 10-year median (16.3%), largely a base effect from the FY24 HDFC Ltd merger inflating the prior-year comparison base. EPS has been range-bound (₹10.6–13.2) over the last 8 quarters rather than compounding steadily.</p>
+  </div>
+
+  <!-- HEALTH -->
+  <div class="panel" id="health">
+    <div class="section-title">Financial Health</div>
+    <div class="grid">
+      <div class="card"><div class="label">Interest Coverage</div><div class="value" style="color:var(--warn)">Low</div><div class="note">Flagged by Screener as a con — typical for leveraged bank balance sheets, but worth tracking.</div></div>
+      <div class="card"><div class="label">Contingent Liabilities</div><div class="value" style="color:var(--warn)">₹35,61,957 Cr</div><div class="note">Large in absolute terms — standard for a bank this size (LCs, guarantees, derivatives), but flagged by Screener.</div></div>
+      <div class="card"><div class="label">CFO / Operating Profit</div><div class="value" style="color:var(--good)">94–98%</div><div class="note">FY25 & FY26 — strong recent cash conversion.</div></div>
+      <div class="card"><div class="label">Free Cash Flow (FY26)</div><div class="value" style="color:var(--good)">₹1,10,144 Cr</div><div class="note">Strong and positive, up from a small base pre-merger.</div></div>
+    </div>
+    <p style="font-size:13px; color:var(--muted);">Note: Standard leverage/coverage ratios (D/E, Current Ratio) used for non-financial companies apply differently to banks, since deposits and borrowings are core to the business model rather than a distress signal by themselves.</p>
+  </div>
+
+  <!-- RETURNS -->
+  <div class="panel" id="returns">
+    <div class="section-title">Return Ratios — 12 Year Trend</div>
+    <table>
+      <tr><th>FY</th><th>ROE %</th></tr>
+      <tr><td>2015</td><td>20%</td></tr>
+      <tr><td>2018</td><td>18%</td></tr>
+      <tr><td>2021</td><td>16%</td></tr>
+      <tr><td>2023</td><td>17%</td></tr>
+      <tr><td>2025</td><td>14%</td></tr>
+      <tr><td>2026 (Last)</td><td><strong>14%</strong></td></tr>
+    </table>
+    <div class="grid">
+      <div class="card"><div class="label">ROE (10Y avg)</div><div class="value">16%</div></div>
+      <div class="card"><div class="label">ROE (5Y avg)</div><div class="value">15%</div></div>
+      <div class="card"><div class="label">ROE (3Y avg)</div><div class="value">15%</div></div>
+      <div class="card"><div class="label">ROCE (current)</div><div class="value">7.02%</div></div>
+    </div>
+    <p style="font-size:14px;"><span class="pill watch">Average — Declining Trend</span> ROE has steadily compressed from 20% (FY15) to 14% (FY26), landing it in the "Average" 10–15% band per standard interpretation thresholds, down from "Good" territory a decade ago. This is the single most important trend to track going forward.</p>
+  </div>
+
+  <!-- PEERS -->
+  <div class="panel" id="peers">
+    <div class="section-title">Peer Comparison (Private Sector Banks)</div>
+    <table>
+      <tr><th>Bank</th><th>ROE</th></tr>
+      <tr><td>ICICI Bank</td><td>16.76%</td></tr>
+      <tr><td>State Bank of India</td><td>16.29%</td></tr>
+      <tr><td>Axis Bank</td><td>13.68%</td></tr>
+      <tr><td><strong>HDFC Bank</strong></td><td><strong>13.72%</strong></td></tr>
+      <tr><td>Kotak Mahindra Bank</td><td>12.19%</td></tr>
+      <tr><td>Yes Bank</td><td>5.97%</td></tr>
+      <tr><td>Bandhan Bank</td><td>5.08%</td></tr>
+    </table>
+    <div class="flag">🚩 Peer ROE figures pulled from a secondary source (Wisesheets) rather than Screener directly — cross-verify before use in any formal writeup.</div>
+    <p style="font-size:14px;">HDFC Bank's ROE now sits <strong>below</strong> both ICICI Bank and SBI — a reversal from its historical position as the profitability leader among large private banks.</p>
+  </div>
+
+  <!-- OWNERSHIP -->
+  <div class="panel" id="ownership">
+    <div class="section-title">Shareholding Pattern Trend (Quarterly)</div>
+    <table>
+      <tr><th>Quarter</th><th>FII</th><th>DII</th><th>Public</th></tr>
+      <tr><td>Sep 2023</td><td>52.13%</td><td>30.39%</td><td>17.30%</td></tr>
+      <tr><td>Mar 2024</td><td>47.83%</td><td>33.33%</td><td>18.64%</td></tr>
+      <tr><td>Mar 2025</td><td>48.30%</td><td>35.68%</td><td>15.84%</td></tr>
+      <tr><td>Mar 2026</td><td>44.05%</td><td>40.14%</td><td>15.64%</td></tr>
+      <tr><td>Jun 2026</td><td><strong>41.82%</strong></td><td><strong>41.75%</strong></td><td>16.27%</td></tr>
+    </table>
+    <p style="font-size:14px;">A clear multi-year rotation: <strong>FII holding has fallen ~10 points</strong> (52%→42%) while <strong>DII holding has risen ~11 points</strong> (30%→42%) since late 2023, with DIIs now roughly matching FIIs for the first time in this dataset. No promoter holding is listed post-merger (0.00% since Mar 2024), consistent with HDFC Bank having no promoter entity after absorbing HDFC Ltd.</p>
+    <div class="section-title">Recent Governance Note</div>
+    <ul>
+      <li>MD & CEO Sashidhar Jagdishan announced on 29 Aug 2026 that he will not seek reappointment and will retire on 26 October 2026, with a successor search underway.</li>
+      <li>Completed a US$1.75 billion senior unsecured bond issue via GIFT City (Aug 2026); rated BBB/Baa3 by S&P and Moody's.</li>
+    </ul>
+  </div>
+
+  <!-- VIEW -->
+  <div class="panel" id="view">
+    <div class="section-title">Strengths</div>
+    <ul>
+      <li>Dominant, entrenched market position — 2nd-largest bank in India, leader across most asset categories.</li>
+      <li>Strong long-run compounding: 19% profit CAGR over 10 years.</li>
+      <li>Excellent recent cash conversion — CFO/Operating Profit near 94–98% in FY25–FY26.</li>
+      <li>Diversified, high-grade credit rating profile (BBB/Baa3 international) supporting cheap global funding access.</li>
+    </ul>
+    <div class="section-title">Watch-Points</div>
+    <ul>
+      <li>ROE has structurally declined from 20% to 14% over a decade — now below ICICI Bank and SBI.</li>
+      <li>Steady FII outflow (52%→42% since 2023) alongside rising DII ownership — a sentiment signal worth monitoring.</li>
+      <li>CEO transition in October 2026 introduces near-term leadership uncertainty.</li>
+      <li>Low interest coverage ratio and large contingent liabilities flagged — largely structural for a bank this size, but worth understanding rather than ignoring.</li>
+    </ul>
+    <div class="section-title">Key Metric to Track</div>
+    <p style="font-size:14px;">Quarterly ROE trend and CASA ratio (deposit mix) over the next 2–3 quarters — these will show whether the post-merger profitability compression is stabilizing or continuing.</p>
+    <div class="section-title">Overall Fundamental Quality</div>
+    <p style="font-size:16px;"><strong>Moderate</strong> <span class="badge moderate">Scale &amp; cash generation strong; returns trend softening</span></p>
+    <div class="section-title">Data Confidence</div>
+    <p><span class="conf moderate">Moderate</span> — core financials cross-checked with Screener.in (primary), but some peer ROE and price-chart figures came from secondary sources and should be independently verified before use in any formal document.</p>
+
+    <div class="disclaimer">
+      This is a view of the fundamentals for educational purposes only. It is not investment advice and not a buy/sell/hold recommendation. Verify all figures independently. The final decision is yours.
+    </div>
+  </div>
+
+</div>
+
+<script>
+  document.querySelectorAll('.tab').forEach(tab=>{
+    tab.addEventListener('click',()=>{
+      document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(tab.dataset.tab).classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
